@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { Mic, StickyNote } from 'lucide-react';
+import { StickyNote } from 'lucide-react';
 import { NatureBackground } from '@/components/nature-background';
 import { TimeWidget } from '@/components/time-widget';
 import { Sidebar } from '@/components/sidebar';
 import { ChatArea } from '@/components/chat-area';
 import { CalendarModal } from '@/components/calendar-modal';
 import { MemoModal } from '@/components/memo-modal';
-import { VoiceChat } from '@/components/voice-chat';
+
 import { VirtualKeyboard } from '@/components/virtual-keyboard';
 import { ToolsPanel } from '@/components/tools-panel';
 import { Button } from '@/components/ui/button';
@@ -21,9 +21,7 @@ export default function Home() {
     switch (activeTab) {
       case 'chat':
         return <ChatArea />;
-      case 'voice':
-      case 'video':
-        return <VoiceChat />;
+
       case 'memo':
         return (
           <section className="flex-1 flex flex-col glassmorphism">
@@ -81,15 +79,6 @@ export default function Home() {
 
         {/* Floating Action Buttons */}
         <div className="fixed bottom-6 right-6 space-y-3 z-20">
-          <Button
-            className="w-12 h-12 bg-river-blue hover:bg-river-light text-white rounded-full shadow-lg hover:shadow-xl transition-all animate-float"
-            style={{animationDelay: '0.5s'}}
-            onClick={() => setActiveTab('voice')}
-            data-testid="quick-voice-button"
-          >
-            <Mic className="w-5 h-5" />
-          </Button>
-          
           <Button
             className="w-12 h-12 bg-mountain-gray hover:bg-mountain-light text-white rounded-full shadow-lg hover:shadow-xl transition-all animate-float"
             style={{animationDelay: '1s'}}

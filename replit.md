@@ -1,10 +1,11 @@
 # Overview
 
-This is a modern full-stack web application built with React (client) and Express.js (server) that provides a comprehensive communication and productivity platform. The application features real-time chat with WebSocket connections, voice/video calling capabilities, memo management, and a virtual keyboard. It uses a Japanese-themed UI with a nature-inspired glassmorphism design and supports both desktop and mobile interfaces.
+This is a modern full-stack web application built with React (client) and Express.js (server) that provides a comprehensive communication and productivity platform called "Nebula-space". The application features real-time chat with WebSocket connections, memo management, virtual keyboard, and various utility tools. It uses a Japanese-themed UI with a nature-inspired glassmorphism design featuring mountains, rivers, and moon elements, supporting both desktop and mobile interfaces.
 
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+Features removed: Voice chat and remote meeting functionality (removed per user request - August 8, 2025)
 
 # System Architecture
 
@@ -14,7 +15,8 @@ Preferred communication style: Simple, everyday language.
 - **Styling**: Tailwind CSS with custom design tokens and glassmorphism effects
 - **State Management**: React Query for server state, React hooks for local state
 - **Routing**: Wouter for lightweight client-side routing
-- **Real-time Communication**: WebSocket client for chat and WebRTC for voice/video calls
+- **Real-time Communication**: WebSocket client for chat messaging
+- **Features**: Virtual keyboard, memo system, utility tools (translator, calculator, search, text editor)
 
 ## Backend Architecture
 - **Framework**: Express.js with TypeScript

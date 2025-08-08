@@ -1,4 +1,4 @@
-import { MessageCircle, Mic, Video, StickyNote, Keyboard, Settings } from 'lucide-react';
+import { MessageCircle, StickyNote, Keyboard, Settings } from 'lucide-react';
 
 interface SidebarProps {
   activeTab: string;
@@ -8,8 +8,6 @@ interface SidebarProps {
 export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
   const navigationItems = [
     { id: 'chat', icon: MessageCircle, label: 'テキストチャット', emoji: '💬' },
-    { id: 'voice', icon: Mic, label: 'ボイスチャット', emoji: '🎤' },
-    { id: 'video', icon: Video, label: 'リモート会議', emoji: '📹' },
     { id: 'memo', icon: StickyNote, label: 'メモ', emoji: '📝' },
     { id: 'keyboard', icon: Keyboard, label: '仮想キーボード', emoji: '⌨️' },
     { id: 'tools', icon: Settings, label: 'その他ツール', emoji: '🛠️' },
