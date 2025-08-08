@@ -1,6 +1,7 @@
 Nebula-space
 
-<img width="1000" height="1000" alt="アプリ" src="https://github.com/user-attachments/assets/891b727a-9a26-4c01-80c3-00c61ab2b726" />
+<img width="4000" height="4000" alt="AI部分画像" src="https://github.com/user-attachments/assets/d31f63e6-9ea4-433f-a16b-f3dc79c98966" />
+
 
 ＜機能＞
 
