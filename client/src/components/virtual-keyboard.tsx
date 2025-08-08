@@ -7,6 +7,7 @@ export function VirtualKeyboard() {
   const [text, setText] = useState('');
   const [isShift, setIsShift] = useState(false);
   const [isJapanese, setIsJapanese] = useState(true);
+  const [showKeyboard, setShowKeyboard] = useState(false);
 
   const japaneseLayout = [
     ['あ', 'い', 'う', 'え', 'お', 'か', 'き', 'く', 'け', 'こ'],
@@ -76,10 +77,23 @@ export function VirtualKeyboard() {
           <Textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onFocus={() => setShowKeyboard(true)}
             placeholder={isJapanese ? "ここに文字が表示されます..." : "Text will appear here..."}
             className="glassmorphism-light border-white border-opacity-20 text-white placeholder-white placeholder-opacity-60 min-h-[150px] text-lg"
             data-testid="keyboard-textarea"
           />
+          <div className="mt-2 flex justify-between items-center">
+            <Button
+              onClick={() => setShowKeyboard(!showKeyboard)}
+              className="bg-river-blue hover:bg-river-light text-white"
+              data-testid="toggle-keyboard"
+            >
+              {showKeyboard ? 'キーボードを隠す' : 'キーボードを表示'}
+            </Button>
+            <div className="text-white text-sm opacity-70">
+              文字数: {text.length}
+            </div>
+          </div>
         </div>
 
         {/* Controls */}
@@ -116,51 +130,53 @@ export function VirtualKeyboard() {
         </div>
 
         {/* Virtual Keyboard */}
-        <div className="glassmorphism-light rounded-lg p-4 flex-1">
-          <div className="grid gap-2 max-w-4xl mx-auto" data-testid="virtual-keyboard">
-            {currentLayout.map((row, rowIndex) => (
-              <div key={rowIndex} className="flex justify-center gap-1">
-                {row.map((key) => (
-                  <Button
-                    key={key}
-                    onClick={() => handleKeyPress(key)}
-                    className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 min-w-[40px] h-12 text-lg font-medium"
-                    data-testid={`key-${key}`}
-                  >
-                    {isShift && !isJapanese ? key.toUpperCase() : key}
-                  </Button>
-                ))}
+        {showKeyboard && (
+          <div className="glassmorphism-light rounded-lg p-4 flex-1 animate-in slide-in-from-bottom duration-300">
+            <div className="grid gap-2 max-w-4xl mx-auto" data-testid="virtual-keyboard">
+              {currentLayout.map((row, rowIndex) => (
+                <div key={rowIndex} className="flex justify-center gap-1">
+                  {row.map((key) => (
+                    <Button
+                      key={key}
+                      onClick={() => handleKeyPress(key)}
+                      className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 min-w-[40px] h-12 text-lg font-medium active:scale-95 transition-transform"
+                      data-testid={`key-${key}`}
+                    >
+                      {isShift && !isJapanese ? key.toUpperCase() : key}
+                    </Button>
+                  ))}
+                </div>
+              ))}
+              
+              {/* Bottom row with special keys */}
+              <div className="flex justify-center gap-1 mt-2">
+                <Button
+                  onClick={handleSpace}
+                  className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 px-8 h-12 active:scale-95 transition-transform"
+                  data-testid="space-key"
+                >
+                  <Space className="w-4 h-4" />
+                </Button>
+                
+                <Button
+                  onClick={handleEnter}
+                  className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 px-6 h-12 active:scale-95 transition-transform"
+                  data-testid="enter-key"
+                >
+                  改行
+                </Button>
+                
+                <Button
+                  onClick={handleBackspace}
+                  className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 px-6 h-12 active:scale-95 transition-transform"
+                  data-testid="backspace-key"
+                >
+                  <Delete className="w-4 h-4" />
+                </Button>
               </div>
-            ))}
-            
-            {/* Bottom row with special keys */}
-            <div className="flex justify-center gap-1 mt-2">
-              <Button
-                onClick={handleSpace}
-                className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 px-8 h-12"
-                data-testid="space-key"
-              >
-                <Space className="w-4 h-4" />
-              </Button>
-              
-              <Button
-                onClick={handleEnter}
-                className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 px-6 h-12"
-                data-testid="enter-key"
-              >
-                改行
-              </Button>
-              
-              <Button
-                onClick={handleBackspace}
-                className="glassmorphism-light border-white border-opacity-20 text-white hover:bg-opacity-30 px-6 h-12"
-                data-testid="backspace-key"
-              >
-                <Delete className="w-4 h-4" />
-              </Button>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

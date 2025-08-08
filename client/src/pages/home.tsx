@@ -8,12 +8,14 @@ import { CalendarModal } from '@/components/calendar-modal';
 import { MemoModal } from '@/components/memo-modal';
 import { VoiceChat } from '@/components/voice-chat';
 import { VirtualKeyboard } from '@/components/virtual-keyboard';
+import { ToolsPanel } from '@/components/tools-panel';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('chat');
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isMemoOpen, setIsMemoOpen] = useState(false);
+  const [activeTool, setActiveTool] = useState<string | null>(null);
 
   const renderMainContent = () => {
     switch (activeTab) {
@@ -44,53 +46,7 @@ export default function Home() {
       case 'keyboard':
         return <VirtualKeyboard />;
       case 'tools':
-        return (
-          <section className="flex-1 flex flex-col glassmorphism">
-            <div className="glassmorphism border-b border-white border-opacity-10 p-4">
-              <h2 className="text-white text-xl font-semibold">その他ツール</h2>
-              <p className="text-white opacity-70 text-sm">便利なツールを利用できます</p>
-            </div>
-            <div className="flex-1 p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="glassmorphism-light rounded-lg p-6 text-center hover:bg-opacity-20 transition-all cursor-pointer">
-                  <div className="text-4xl mb-4">🌐</div>
-                  <h3 className="text-white text-lg font-medium mb-2">翻訳ツール</h3>
-                  <p className="text-white opacity-70 text-sm">多言語翻訳機能</p>
-                </div>
-                
-                <div className="glassmorphism-light rounded-lg p-6 text-center hover:bg-opacity-20 transition-all cursor-pointer">
-                  <div className="text-4xl mb-4">🎨</div>
-                  <h3 className="text-white text-lg font-medium mb-2">デザインツール</h3>
-                  <p className="text-white opacity-70 text-sm">簡単な画像編集</p>
-                </div>
-                
-                <div className="glassmorphism-light rounded-lg p-6 text-center hover:bg-opacity-20 transition-all cursor-pointer">
-                  <div className="text-4xl mb-4">📊</div>
-                  <h3 className="text-white text-lg font-medium mb-2">計算機</h3>
-                  <p className="text-white opacity-70 text-sm">高機能計算機</p>
-                </div>
-                
-                <div className="glassmorphism-light rounded-lg p-6 text-center hover:bg-opacity-20 transition-all cursor-pointer">
-                  <div className="text-4xl mb-4">📝</div>
-                  <h3 className="text-white text-lg font-medium mb-2">テキストエディタ</h3>
-                  <p className="text-white opacity-70 text-sm">リッチテキスト編集</p>
-                </div>
-                
-                <div className="glassmorphism-light rounded-lg p-6 text-center hover:bg-opacity-20 transition-all cursor-pointer">
-                  <div className="text-4xl mb-4">🔍</div>
-                  <h3 className="text-white text-lg font-medium mb-2">検索ツール</h3>
-                  <p className="text-white opacity-70 text-sm">ウェブ検索機能</p>
-                </div>
-                
-                <div className="glassmorphism-light rounded-lg p-6 text-center hover:bg-opacity-20 transition-all cursor-pointer">
-                  <div className="text-4xl mb-4">🎵</div>
-                  <h3 className="text-white text-lg font-medium mb-2">音楽プレイヤー</h3>
-                  <p className="text-white opacity-70 text-sm">音楽再生機能</p>
-                </div>
-              </div>
-            </div>
-          </section>
-        );
+        return <ToolsPanel activeTool={activeTool} onToolSelect={setActiveTool} />;
       default:
         return <ChatArea />;
     }

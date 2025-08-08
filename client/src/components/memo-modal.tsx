@@ -35,7 +35,7 @@ export function MemoModal({ isOpen, onClose }: MemoModalProps) {
   const { data: memos = [], isLoading } = useQuery({
     queryKey: ['/api/memos', userId],
     enabled: isOpen,
-  });
+  }) as { data: Memo[], isLoading: boolean };
 
   const createMemoMutation = useMutation({
     mutationFn: async (memo: { title: string; content: string; userId: string }) => {
@@ -179,7 +179,7 @@ export function MemoModal({ isOpen, onClose }: MemoModalProps) {
                     メモがありません。新規メモを作成してください。
                   </div>
                 ) : (
-                  memos.map((memo: Memo) => (
+                  memos.map((memo) => (
                     <div 
                       key={memo.id} 
                       className="glassmorphism-light rounded-lg p-4 hover:bg-opacity-20 transition-all"
